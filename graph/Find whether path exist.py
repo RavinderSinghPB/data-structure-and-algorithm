@@ -2,8 +2,7 @@ from collections import deque
 
 def adj(cn, mx, m, n):  # fun for possible adjacent node
     al = []
-    i = cn[0]
-    j = cn[1]
+    i,j = cn
     pal = [(i + 1, j), (i - 1, j), (i, j + 1), (i, j - 1)]
     for e in pal:
         if 0 <= e[0] < n and 0 <= e[1] < m:

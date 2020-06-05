@@ -2,40 +2,41 @@ from collections import defaultdict
 
 class Graph:
     def __init__(self):
-        self.graph = defaultdict(list)
+        self.graph = dict()
 
     def add(self,u,v):
-        self.graph[u].append(v)
+        if u in self.graph:
+            self.graph[u].append(v)
+        else:
+            self.graph[u] = [v]
 
 
-def dfs(g, k,c, fvst, lvst,edg, dfsl):
-    #global c, fvst, lvst, t, edg, dfsl
+def dfs(g, k,clr, fvst, lvst,edg, dfsl):
+    #global clr, fvst, lvst, t, edg, dfsl
     dfsl.append(k)
     dfs.t += 1
     fvst[k] = dfs.t
-    c[k] = 'g'
+    clr[k] = 'g'
 
-    try:
+    if k in g:
         for av in g[k]:
-            if c[av] == 'w':
+            if clr[av] == 'w':
 
-                dfs(g, av,c, fvst, lvst, edg, dfsl)
-            elif c[av] == 'g':
+                dfs(g, av, clr, fvst, lvst, edg, dfsl)
+            elif clr[av] == 'g':
                 edg['bck'].append((k, av))
-            elif c[av] == 'b':
+            elif clr[av] == 'b':
                 edg['crs'].append((k, av))
-    except:
-        pass
 
-    c[k] = 'b'
+    clr[k] = 'b'
     dfs.t += 1
     lvst[k] = dfs.t
 
 
 
 def Dfs(g):
-    #global c, fvst, lvst, t
-    c = {}
+    #global clr, fvst, lvst, t
+    clr = {}
     fvst = {}
     lvst = {}
     dfs.t = 0
@@ -43,22 +44,22 @@ def Dfs(g):
     edg = {'bck': [], 'crs': []}
 
     for v, adjv in g.items():
-        c[v] = 'w'
+        clr[v] = 'w'
         fvst[v] = 0
         lvst[v] = 0
         for av in adjv:
-            c[av] = 'w'
+            clr[av] = 'w'
             fvst[av] = 0
             lvst[av] = 0
     for cn in g:
-        if c[cn] == 'w':
-            dfs(g, cn,c,fvst,lvst,edg,dfsl)
+        if clr[cn] == 'w':
+            dfs(g, cn,clr,fvst,lvst,edg,dfsl)
 
-    # for k, v in edg.items():
-    #     print(k, v)
-    #
-    # for v in dfsl:
-    #     print('vrtx', v, 'first vst-->', fvst[v], 'last vst-->', lvst[v])
+    for k, v in edg.items():
+        print(k, v)
+
+    for v in dfsl:
+        print('vrtx', v, 'first vst-->', fvst[v], 'last vst-->', lvst[v])
 
     if len(edg['bck'])>=1:
         return True
@@ -76,17 +77,12 @@ if __name__ == '__main__':
         g = Graph()
 
         V, E = [int(x) for x in input().split()]
-        #edgeInfo = [int(x) for x in input().split()]
 
         for i in range(E):
             u,v=[int(x) for x in input().split()]
             g.add(u,v)
 
-        if Dfs(g.graph):
-            #back edge present
-            print(1)
-        else:
-            print(0)
+        Dfs(g.graph)
 
 
 

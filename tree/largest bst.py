@@ -6,6 +6,32 @@ import sys
 sys.setrecursionlimit(10000)
 
 
+class Node1:
+    def __init__(self,isBst,size,mini,maxi):
+        self.isBst = isBst
+        self.size = size
+        self.mini = mini
+        self.maxi = maxi
+def bst(root):
+    if not root:
+        x=Node1(True,0,1000000,0)
+        return x
+    left=bst(root.left)
+    right=bst(root.right)
+
+    if left.isBst and right.isBst and root.data>left.maxi and root.data<right.mini:
+        x= Node1(True,1+left.size+right.size,min(root.data,left.mini),max(root.data,right.maxi))
+    else:
+        x= Node1(False,max(left.size,right.size),1000000,0)
+
+    return x
+
+def largestBSTBT(root):
+    return bst(root).size
+
+
+
+
 def largestBSTBT(root):
     # Base cases : When tree is empty or it has
     # one child.
@@ -43,51 +69,6 @@ def largestBSTBT(root):
     ret[4] = False
 
     return ret
-
-# def lbst(root):
-#
-#     if not root:
-#         return (None,0,0,True)
-#
-#     lft=lbst(root.left)
-#     rt=lbst(root.right)
-#
-#     if not lft[-1] or not rt[-1]:
-#         return (None,0,max(lft[2],rt[2]),False)
-#
-#     if lft[0] and rt[0]:
-#         if rt[0]>=lft[0] and root.data>=lft[0] and root.data<=rt[0]:
-#             ctn=rt[1]+lft[1]+1                                          #current total node
-#
-#             return (root.data,ctn,max(ctn,lft[2],rt[2]),True)
-#
-#         else:
-#             return (None,0,max(rt[2],lft[2]),False)
-#     elif lft[0]:
-#         if lft[0]<=root.data:
-#             ctn=lft[1]+1
-#             return (root.data,ctn,max(ctn,lft[2]),True)
-#         else:
-#             return (None,0,lft[2],False)
-#
-#     elif rt[0]:
-#         if rt[0]>=root.data:
-#             ctn=rt[1]+1
-#             return (root.data,ctn,max(ctn,rt[2]),True)
-#         else:
-#             return (None,0,rt[2],False)
-#
-#     return (root.data,1,1,True)
-#
-#
-#
-# def largestBst(root):
-#     mx=1
-#
-#     return lbst(root)[2]
-
-
-
 
 
 
@@ -176,95 +157,3 @@ if __name__ == "__main__":
 
         print(largestBSTBT(root)[3])
 
-
-# def largestBST(node):
-#     # Set the initial values for calling
-#     # largestBSTUtil()
-#     Min = [inf]  # For minimum value in
-#     # right subtree
-#     Max = [-inf]  # For maximum value in
-#     # left subtree
-#
-#     max_size = [0]  # For size of the largest BST
-#     is_bst = [0]
-#
-#     largestBSTUtil(node, Min, Max,
-#                    max_size, is_bst)
-#
-#     return max_size[0]
-#
-#
-# # largestBSTUtil() updates max_size_ref[0]
-# # for the size of the largest BST subtree.
-# # Also, if the tree rooted with node is
-# # non-empty and a BST, then returns size of
-# # the tree. Otherwise returns 0.
-# def largestBSTUtil(node, min_ref, max_ref,
-#                    max_size_ref, is_bst_ref):
-#     # Base Case
-#     if node == None:
-#         is_bst_ref[0] = 1  # An empty tree is BST
-#         return 0  # Size of the BST is 0
-#
-#     Min = inf
-#
-#     # A flag variable for left subtree property
-#     # i.e., max(root.left) < root.data
-#     left_flag = False
-#
-#     # A flag variable for right subtree property
-#     # i.e., min(root.right) > root.data
-#     right_flag = False
-#
-#     ls, rs = 0, 0  # To store sizes of left and
-#     # right subtrees
-#
-#     # Following tasks are done by recursive
-#     # call for left subtree
-#     # a) Get the maximum value in left subtree
-#     #   (Stored in max_ref[0])
-#     # b) Check whether Left Subtree is BST or
-#     #    not (Stored in is_bst_ref[0])
-#     # c) Get the size of maximum size BST in
-#     #    left subtree (updates max_size[0])
-#     max_ref[0] = -inf
-#     ls = largestBSTUtil(node.left, min_ref, max_ref,
-#                         max_size_ref, is_bst_ref)
-#     if is_bst_ref[0] == 1 and node.data > max_ref[0]:
-#         left_flag = True
-#
-#     # Before updating min_ref[0], store the min
-#     # value in left subtree. So that we have the
-#     # correct minimum value for this subtree
-#     Min = min_ref[0]
-#
-#     # The following recursive call does similar
-#     # (similar to left subtree) task for right subtree
-#     min_ref[0] = inf
-#     rs = largestBSTUtil(node.right, min_ref, max_ref,
-#                         max_size_ref, is_bst_ref)
-#     if is_bst_ref[0] == 1 and node.data < min_ref[0]:
-#         right_flag = True
-#
-#     # Update min and max values for the
-#     # parent recursive calls
-#     if Min < min_ref[0]:
-#         min_ref[0] = Min
-#     if node.data < min_ref[0]:  # For leaf nodes
-#         min_ref[0] = node.data
-#     if node.data > max_ref[0]:
-#         max_ref[0] = node.data
-#
-#         # If both left and right subtrees are BST.
-#     # And left and right subtree properties hold
-#     # for this node, then this tree is BST.
-#     # So return the size of this tree
-#     if left_flag and right_flag:
-#         if ls + rs + 1 > max_size_ref[0]:
-#             max_size_ref[0] = ls + rs + 1
-#         return ls + rs + 1
-#     else:
-#
-#         # Since this subtree is not BST, set is_bst
-#         # flag for parent calls is_bst_ref[0] = 0;
-#         return 0
