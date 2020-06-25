@@ -1,5 +1,6 @@
 from math import inf
 
+# need improvment
 
 def minCoin(coins, N, val):
     coins.sort()
