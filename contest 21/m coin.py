@@ -34,7 +34,7 @@ def maximumSum(mat,n,k):
 
 
 if __name__ =='__main__':
-    from math import inf
+    from mathpro.math import inf
 
     tcs=int(input())
 

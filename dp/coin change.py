@@ -1,4 +1,4 @@
-from math import inf
+from mathpro.math import inf
 
 # need improvment
 

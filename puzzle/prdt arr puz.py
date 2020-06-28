@@ -1,5 +1,3 @@
-from math import log10
-
 # epsilon value to maintain precision
 EPS = 1e-9
 

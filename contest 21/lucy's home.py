@@ -40,7 +40,6 @@ def Min_Time(arr,n,k):
 
 
 if __name__ == '__main__':
-    from math import inf
 
     tcs=int(input())
 

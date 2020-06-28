@@ -1,4 +1,4 @@
-from math import ceil,log2
+from mathpro.math import ceil,log2
 
 def height(arr,n):
     return ceil(log2(n+1))-1
