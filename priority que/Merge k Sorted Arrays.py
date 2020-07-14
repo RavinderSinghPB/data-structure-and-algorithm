@@ -1,12 +1,15 @@
 import heapq as hq
 
-def mergeKArrays(arr,k):
+
+def mergeKArrays(arr, k):
     h = []
 
-                                            # insert first element of each array
+    # insert first element of each array
     for i in range(k):
-        hq.heappush(h, (arr[i][0], i, 0))  # arr[i][0]:val, i: index of array(row no of array), 0: current index of element/val in array
-                                           # by default first element of tuple will be used for heap operation
+        hq.heappush(h, (
+            arr[i][0], i,
+            0))  # arr[i][0]:val, i: index of array(row no of array), 0: current index of element/val in array
+        # by default first element of tuple will be used for heap operation
     output = []
 
     while h:
@@ -16,14 +19,6 @@ def mergeKArrays(arr,k):
         if j + 1 < len(arr[i]):
             hq.heappush(h, (arr[i][j + 1], i, j + 1))
     return output
-
-
-
-
-
-
-
-
 
 
 # class lst_entry:
@@ -84,22 +79,21 @@ def mergeKArrays(arr,k):
 #     return arr
 
 
-
-if __name__=="__main__":
-    t=int(input())
+if __name__ == "__main__":
+    t = int(input())
     for _ in range(t):
-        k= int(input())
-        arrElement= [int(x) for x in input().split()]
+        k = int(input())
+        arrElement = [int(x) for x in input().split()]
 
-        arr=[]
+        arr = []
 
-        n=0
+        n = 0
         for i in range(k):
             arr.append([])
             for j in range(k):
                 arr[i].append(arrElement[n])
-                n+=1
+                n += 1
 
-        merged_arr = mergeKArrays(arr,k)
+        merged_arr = mergeKArrays(arr, k)
 
         print(*merged_arr)

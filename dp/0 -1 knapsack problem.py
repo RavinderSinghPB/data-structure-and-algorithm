@@ -9,10 +9,10 @@ def knapsack(cpct, wt, val, n):
     for i in range(1, row):
         for j in range(1, colmn):
             if wt[i - 1] > j:
-                dp[i][j]=dp[i-1][j]
+                dp[i][j] = dp[i - 1][j]
             else:
                 dp[i][j] = max(dp[i - 1][j], val[i - 1] + dp[i - 1][j - wt[i - 1]])
-    return dp[n][colmn-1]
+    return dp[n][colmn - 1]
 
 
 if __name__ == '__main__':

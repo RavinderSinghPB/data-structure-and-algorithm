@@ -1,5 +1,5 @@
 
-from mathpro.math import inf
+from math import inf
 INT_MAX = inf
 
 """ A Dynamic Programming based function that 

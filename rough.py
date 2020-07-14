@@ -1,23 +1,32 @@
-def deleteElements(arr, n, k):
-    # create an empty stack st
-    st = []
-    st.append(arr[0])
+''' Read input from STDIN. Print your output to STDOUT '''
 
-    # index to mantain the top
-    # of the stack
-    top = 0
-    count = 0
 
-    for i in range(1, n):
+# Use input() to read input from STDIN and use print to write your output to STDOUT
 
-        # pop till the present element
-        # is greater than stack's top
-        # element
-        while (len(st) != 0 and count < k
-               and st[top] < arr[i]):
-            st.pop()
-            count += 1
-            top -= 1
+def main():
+    n = int(input())
+    vlnstr = input().split()
+    vln = []
+    for e in vlnstr:
+        vln.append(int(e))
+    plrEnrg = input().split()
+    plr = []
+    for e in plrEnrg:
+        plr.append(int(e))
 
-        st.append(arr[i])
-        top += 1
+    vln.sort()
+    plr.sort()
+
+    for i in range(n):
+        if plr[i] <= vln[i]:
+            print('LOSE')
+            return
+    print('WIN')
+
+
+if __name__ == '__main__':
+    T = int(input())
+
+    for tcs in range(T):
+        main()
+

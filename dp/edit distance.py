@@ -27,6 +27,6 @@ if __name__ == '__main__':
     for tcs in range(T):
         n1, n2 = [int(x) for x in input().split()]
 
-        str1,str2 = input().split()
+        str1, str2 = input().split()
 
-        print(editDistance(str1,str2,n1,n2))
+        print(editDistance(str1, str2, n1, n2))

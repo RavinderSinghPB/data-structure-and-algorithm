@@ -1,22 +1,23 @@
-def arrayRepresentHeap(arr,n):
-    flag=1
+def arrayRepresentHeap(arr, n):
+    for i in range(((n - 2) // 2) + 1):
 
-    for i in range(n//2-1):
-        if (arr[i]<arr[(2*i)+1]) or (arr[i]<arr[(2*i)+2]):
-            flag=0
-            break
-    if flag ==0:
-        return 0
-    else:
-        return 1
+        # If left child is greater,
+        # return false
+        if arr[2 * i + 1] > arr[i]:
+            return 0
+
+        # If right child is greater,
+        # return false
+        if (2 * i + 2 < n and
+                arr[2 * i + 2] > arr[i]):
+            return 0
+    return 1
 
 
-
-
-if __name__ =='__main__':
-    t= int(input())
+if __name__ == '__main__':
+    t = int(input())
     for tcs in range(t):
-        n=int(input())
-        arr=[int(x) for x in input().split()]
+        n = int(input())
+        arr = [int(x) for x in input().split()]
 
-        print(arrayRepresentHeap(arr,n))
+        print(arrayRepresentHeap(arr, n))
