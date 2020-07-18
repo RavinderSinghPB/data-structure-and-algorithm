@@ -1,15 +1,33 @@
-def lcs(s1,s2,m,n,mz):
+def calculate(str1, str2, i, j, dp):
+    if i >= len(str1) or j >= len(str2):
+        return 0
 
-    pass
+    if dp[i][j] != -1:
+        return dp[i][j]
 
-if __name__=='__main__':
-    tcs=int(input())
+    ans = 0
 
-    for _ in range(tcs):
-        n,m=[int(x) for x in input().split()]
-        s1=input()
-        s2=input()
+    if str1[i] == str2[j]:
+        dp[i][j] = 1 + calculate(str1, str2, i + 1, j + 1, dp)
+        return dp[i][j]
 
-        mz=[[-1]*(n+1)]*(m+1)
+    ans = max(calculate(str1, str2, i + 1, j, dp), calculate(str1, str2, i, j + 1, dp))
+    dp[i][j] = ans
 
-        print(lcs(s1,s2,m,n,mz))
+    return dp[i][j]
+
+
+def max_bridge(str1, str2):
+    n1, n2 = len(str1), len(str2)
+    dp = [[-1 for i in range(n2 + 1)] for j in range(n1 + 1)]
+
+    return calculate(str1, str2, 0, 0,dp)
+
+
+if __name__ == '__main__':
+    T = int(input())
+
+    for _ in range(T):
+        str1, str2 = input().split()
+
+        print(max_bridge(str1, str2))

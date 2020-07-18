@@ -2,31 +2,30 @@
 
 
 # Use input() to read input from STDIN and use print to write your output to STDOUT
+def fun():
+    pass
 
-def main():
-    n = int(input())
-    vlnstr = input().split()
-    vln = []
-    for e in vlnstr:
-        vln.append(int(e))
-    plrEnrg = input().split()
-    plr = []
-    for e in plrEnrg:
-        plr.append(int(e))
+if __name__ == '__main__':
+    T = int(input())
 
-    vln.sort()
-    plr.sort()
+    for tcs in range(T):
+        Str = input()
 
-    for i in range(n):
-        if plr[i] <= vln[i]:
-            print('LOSE')
-            return
-    print('WIN')
+        print(fun())
+
+if __name__ == '__main__':
+    T = int(input())
+
+    for tcs in range(T):
+        n = int(input())
+        List = input()
+
+        print(fun())
 
 
 if __name__ == '__main__':
     T = int(input())
 
     for tcs in range(T):
-        main()
+        fun()
 
